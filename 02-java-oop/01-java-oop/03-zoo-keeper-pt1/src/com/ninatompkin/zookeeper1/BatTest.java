@@ -13,8 +13,7 @@ public class BatTest {
 		batty.eatHumans();
 		batty.fly();
 		batty.fly();
-		batty.healthCheck();
-		
+		batty.healthCheck();	
 	}
 
 }

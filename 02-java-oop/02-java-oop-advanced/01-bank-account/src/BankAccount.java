@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BankAccount {
@@ -5,13 +6,14 @@ public class BankAccount {
     private double checkingBalance;
     private double savingsBalance;
     public static int numberOfAccounts;
-    public static double totalMoney;
+    private static ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
     
     public BankAccount() {
         accountNumber = generateAccountNumber();
         checkingBalance = 0;
         savingsBalance = 0;
         numberOfAccounts++;
+        accounts.add(this);
     }
     
     public String generateAccountNumber() {
@@ -57,11 +59,15 @@ public class BankAccount {
     	}
     }
     
-    public double seeAccountTotals() {
-    	double total = this.checkingBalance + this.savingsBalance;
-    	String s = String.format("%.2f", total);
-    	System.out.println("Wow, big shot over here! Your accounts have a total of $"+s+" in them.");
-    	return total;
+    //Static means that it's not associated with an individual account
+    public static double seeAccountTotals() {
+    	double sum = 0;
+    	for (BankAccount account: accounts) {
+    		sum += account.checkingBalance + account.savingsBalance;
+    	}
+    	String s = String.format("%.2f", sum);
+    	System.out.println("Our accounts contain $"+ s +" dollars.");
+    	return sum;
     }
     
 }

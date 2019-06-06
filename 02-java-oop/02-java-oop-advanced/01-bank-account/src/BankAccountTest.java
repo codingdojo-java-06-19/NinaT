@@ -9,7 +9,7 @@ public class BankAccountTest {
         person3.depositMoney("checking", 50);
         person3.withdrawlMoney(25);
         person3.withdrawlMoney(26);
-
+        System.out.println(BankAccount.seeAccountTotals());
 	}
 
 }

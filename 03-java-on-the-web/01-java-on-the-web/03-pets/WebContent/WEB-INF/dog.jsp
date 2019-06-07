@@ -9,7 +9,9 @@
 	<title>Show Pet page</title>
 </head>
 	<body>
-	<p>Your created a <c:out value="${dog.breed}"/>!</p>
-	<p><c:out value="${dog.showAffection()}"/></p>
+	<div class="container">
+		<p>Your created a <c:out value="${dog.breed}"/>!</p>
+		<p><c:out value="${dog.showAffection()}"/></p>
+	</div>
 	</body>
 </html>

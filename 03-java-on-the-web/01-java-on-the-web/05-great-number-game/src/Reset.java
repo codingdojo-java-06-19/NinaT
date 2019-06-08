@@ -32,6 +32,7 @@ public class Reset extends HttpServlet {
 		session.invalidate();
 		System.out.println("I've been clicked!!");
 		response.sendRedirect("Home");
+		return;
 	}
 
 	/**

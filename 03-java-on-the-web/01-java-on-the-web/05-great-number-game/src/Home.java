@@ -25,23 +25,16 @@ public class Home extends HttpServlet {
         super();
     }
     
-    public String randomGenerator() {
+    public String randomGenerator(String num1, String num2) {
     	Random rand = new Random();
-    	String randNum = String.valueOf(rand.nextInt(100));
+    	int lowNum = Integer.parseInt(num1);
+    	int highNum = Integer.parseInt(num2);
+    	String randNum = String.valueOf(rand.nextInt((highNum - lowNum) +1) + lowNum);
     	return randNum;
     }
+    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
-//		System.out.println("Is there something called randNum yet?" + session.getAttribute("randNum"));
-
-		//If there's nothing called "RandNum" in session yet, that means that the game hasn't started. Therefore, we'll generate a random number and add it into session.
-		if (session.getAttribute("randNum").equals(0)) {
-			session.setAttribute("randNum", randomGenerator());
-			System.out.println("Welcome to the Great Number Game! The secret random number is "+ session.getAttribute("randNum"));
-		}		
-		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/index.jsp");
         view.forward(request, response);
@@ -50,7 +43,21 @@ public class Home extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		System.out.println("Shh, don't forget! The Secret random number is "+session.getAttribute("randNum"));
+		
+		//The following 4 lines take the input from the form in order to generate their preferred random number and store it in session.
+		String lowNum = request.getParameter("lowNum");
+		session.setAttribute("lowNum", lowNum);
+		String highNum = request.getParameter("highNum");
+		session.setAttribute("highNum", highNum);
+		System.out.println("The user wants to generate a random number between "+lowNum+" and "+highNum);
+				
+		if (session.getAttribute("randNum") == null) {
+			session.setAttribute("randNum", randomGenerator(lowNum, highNum));
+			System.out.println("Welcome to the Great Number Game! The secret random number is "+ session.getAttribute("randNum"));
+		}
+		
+		
+		System.out.println("Shh, don't tell! Out secret random number is "+session.getAttribute("randNum"));
 		
 		//Gets the value of parameter sent via the form called "guess"...convert it into an integer
 		String guess = request.getParameter("guess");

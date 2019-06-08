@@ -42,3 +42,19 @@ input[type=submit]{
 	display:block;
 	margin:5px auto 50px auto;
 }
+
+.alert{
+	padding:20px;
+	margin:20px;
+	color:white;
+	font-weight: normal;
+	font-size:1em;
+}
+
+.alert .red {
+	background-color:red;
+}
+
+.alert .green {
+	background-color: green;
+}

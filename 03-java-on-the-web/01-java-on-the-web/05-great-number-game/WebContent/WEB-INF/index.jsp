@@ -32,13 +32,15 @@
 				</form>
 				<% } %>
 				<% if (session.getAttribute("guess") != null) { %>
-					<% Integer guess = (Integer)session.getAttribute("guess"); %>
-					<% Integer randNum = (Integer)session.getAttribute("randNum"); %>
-					<% if (guess > randNum){ %>
+					<% String guess = (String)session.getAttribute("guess"); %>
+					<% Integer guessNum = Integer.valueOf(guess); %>
+					<% String randNum = (String)session.getAttribute("randNum"); %>
+					<% Integer randNumNum = Integer.valueOf(randNum); %>
+					<% if (guessNum > randNumNum){ %>
 						<div class="alert red">
 							<p>Too high!</p>
 						</div>
-					<% } else if (guess < randNum) { %>
+					<% } else if (guessNum < randNumNum) { %>
 						<div class="alert red">
 							<p>Too low!</p>
 						</div>

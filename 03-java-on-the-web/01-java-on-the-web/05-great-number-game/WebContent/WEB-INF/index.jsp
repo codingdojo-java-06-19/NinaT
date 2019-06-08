@@ -10,8 +10,10 @@
 </head>
 	<body>
 		<div class="container">
+		<% if (session.getAttribute("attempts") == null || (Integer)session.getAttribute("attempts")!= 5) { %>
 			<h1>Welcome to the Great Number Game!</h1>
 				<% if (session.getAttribute("randNum") == null){%>
+				<p>You only have 10 guesses. Good luck!</p>
 				<form action="Home" method="POST" autocomplete="off">
 					<label>First, generate a (secret!) random  number between </label>
 					<input class="entry" type="text" name="lowNum">
@@ -27,32 +29,39 @@
 					<input class="guess" type="text" name="guess">
 					<input type="submit" value="Submit"/>
 				</form>
-				<form action="Reset" method="get">
-					<input type="submit" value="Reset Game"/>
-				</form>
 				<% } %>
 				<% if (session.getAttribute("guess") != null) { %>
-					<% String guess = (String)session.getAttribute("guess"); %>
-					<% Integer guessNum = Integer.valueOf(guess); %>
-					<% String randNum = (String)session.getAttribute("randNum"); %>
-					<% Integer randNumNum = Integer.valueOf(randNum); %>
-					<% if (guessNum > randNumNum){ %>
+					<% String result = (String)session.getAttribute("result"); %>
+					<% if (result == "toohigh"){ %>
 						<div class="alert red">
 							<p>Too high!</p>
 						</div>
-					<% } else if (guessNum < randNumNum) { %>
+					<% } else if (result == "toolow") { %>
 						<div class="alert red">
 							<p>Too low!</p>
 						</div>
 					<% } else { %>
 						<div class="alert green">
-							<p><span><c:out value="${guess}"/></span> was the number!></p>
+							<p><span><c:out value="${guess}"/></span> was the number!</p>
 							<form action="Reset" method="get">
 								<input type="submit" value="Play again!"/>
 							</form>
 						</div>
 					<% } %>
+					<p>Guess count: <span><c:out value="${attempts}"/></span>
+					<form action="Reset" method="get">
+						<input type="submit" value="Reset Game"/>
+					</form>
+					
 				<% } %>
+				 
+			<% } else {%>
+				<p>You lost. </p>
+				<form action="Reset" method="get">
+					<input type="submit" value="Play again!"/>
+				</form>
+			<% } %>
+			
 		</div>
 	</body>
 </html>

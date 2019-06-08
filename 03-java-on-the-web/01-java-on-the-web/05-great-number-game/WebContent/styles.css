@@ -40,21 +40,26 @@ input[type=submit]{
 	padding:5px;
 	background-color:white;
 	display:block;
-	margin:5px auto 50px auto;
+	margin:5px auto 10px auto;
 }
 
 .alert{
+	border:2px solid black;
+	width:100px;
+	height:100px;
 	padding:20px;
-	margin:20px;
+	margin:20px auto 20px auto;
 	color:white;
-	font-weight: normal;
+	font-weight: bold;
 	font-size:1em;
 }
 
-.alert .red {
+.red {
 	background-color:red;
+	line-height:100px;
 }
 
-.alert .green {
+.green {
 	background-color: green;
 }
+

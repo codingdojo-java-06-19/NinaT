@@ -1,0 +1,78 @@
+*{
+	margin:0;
+	padding:0;
+	font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+}
+
+.container{
+	padding:30px;	
+	width:70%;
+}
+
+a{
+	color:blue;
+}
+
+.header{
+	display:inline-block;
+	font-size:1em;
+	font-weight:normal;
+	margin-bottom:30px;
+}
+
+.right-link{
+	display:inline-block;
+	float:right;
+}
+
+.roster{
+	border-collapse: collapse;
+	width:100%;
+	border:2px solid black;
+}
+
+.roster td, .roster th {
+	border:1px solid #ddd;
+	border-right:2px solid black;
+	padding:8px;
+}
+
+.roster tr:nth-child(even){
+	background-color:#f2f2f2;
+}
+
+.roster tr:hover{
+	background-color: #ddd;
+}
+
+.roster th {
+	padding-top:6px;
+	padding-bottom: 6px;
+	text-align: left;
+	background-color: lightgrey;
+}
+
+.form-group{
+	margin-left: 60px;	
+	width:350px;
+	height:100px;
+}
+
+input{
+	border:2px solid black;
+}
+
+input[type=text]{
+	padding:5px;
+	font-size:1em;
+}
+
+input[type=submit]{
+	padding:5px;
+	background-color:white;
+	box-shadow:2px 3px;
+	display:block;
+	margin-top:20px;
+	margin-right:25px;
+	margin-left:auto;
+}

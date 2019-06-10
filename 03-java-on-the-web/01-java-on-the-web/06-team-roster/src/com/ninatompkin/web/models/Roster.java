@@ -16,6 +16,19 @@ public class Roster {
 		return this.teams;
 	}
 	
+	public Team getOneTeam(String id) {
+		return getOneTeam(Integer.parseInt(id));
+	}
+	
+	public Team getOneTeam(int id) {
+		for (int i=0; i<teams.size(); i++) {
+			if (teams.get(i).getId()==id) {
+			return teams.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public void addTeam(String teamName) {
 		Team team = new Team(teamName);
 		addTeam(team);

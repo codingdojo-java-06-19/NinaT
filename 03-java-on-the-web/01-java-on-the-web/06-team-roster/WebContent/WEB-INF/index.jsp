@@ -19,11 +19,12 @@
 				<th>Players</th>
 				<th>Action</th>
 			</tr>
+			<!-- Because our roster contains a list of our teams, we'll call upon the forEach method to loop through the array of teams. -->
 			<c:forEach items="${roster.getTeams()}" var="team">
 			<tr>
-				<td>${team.teamName}</td>
+				<td>${team.getName()}</td>
 				<td>${team.getPlayers().size()}</td>
-				<td><a href="Teams?id<c:out value="${team.id}"/>">Details</a>  | <a href="DeleteTeam?id<c:out value="${team.id}"/>">Delete</a></td>
+				<td><a href="Teams?id=<c:out value="${team.getId()}"/>">Details</a>  | <a href="DeleteTeam?id<c:out value="${team.id}"/>">Delete</a></td>
 			</tr>
 			</c:forEach>
 		</table>

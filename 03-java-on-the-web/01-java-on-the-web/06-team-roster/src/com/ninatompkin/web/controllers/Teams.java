@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ninatompkin.web.models.Roster;
+import com.ninatompkin.web.models.Team;
+
 /**
  * Servlet implementation class Teams
  */
@@ -22,6 +25,7 @@ public class Teams extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		//Remember that the name of the parameter variables have to match what's coming from the url!
 		String id = request.getParameter("id");
 		String page = "";
@@ -29,10 +33,20 @@ public class Teams extends HttpServlet {
 		//If we haven't, it means we're looking at the list of all teams.
 		System.out.println("id is "+id);
 		if (id != null) {
+			//In order to render this specific teams info in our view, we have to use our roster's "getOneTeam" method to return information about the team with id we passed in.
+			Roster roster = (Roster)session.getAttribute("roster");
+			Team thisTeam = roster.getOneTeam(id);
+			//We'll add this team into request so that we can access it in our view...
+			request.setAttribute("team", thisTeam);
+			
+			//And we'll also add this team into session so that we can access it in our Players Controller 
+			session.setAttribute("team", thisTeam);
+			
 			page = "/WEB-INF/TeamInfo.jsp";
 		}else {
 			page = "/WEB-INF/NewTeam.jsp";
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(page);
         view.forward(request, response);
 		

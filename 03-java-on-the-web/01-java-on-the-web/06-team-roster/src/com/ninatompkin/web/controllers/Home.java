@@ -29,13 +29,20 @@ public class Home extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Each time we render the page, we check session for the existence of a roster.
 		HttpSession session = request.getSession();
 		Roster roster = (Roster)session.getAttribute("roster");
+		
+		//If there isn't a roster in session....
 		if (roster == null ) {
+			System.out.println("No roster detected. Creating new instance of Roster...");
 			roster = new Roster();
-			//Session will make this content persist across different controllers
+			//BTW - we need session because session will make this content persist across different controllers
 			session.setAttribute("roster", roster);
 		}
+		//Otherwise, if there is a roster in session, we want to display its attributes in our view.
+		//Why use "request.setAttribute" instead of "session.setAttribute"? 
 		//Request makes this roster available to the view. Using request (instead of session) is best practice.
 		request.setAttribute("roster", roster);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/index.jsp");
@@ -44,14 +51,20 @@ public class Home extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//After we've posted new Team Info from our New Team page...
 		HttpSession session = request.getSession();
-		System.out.println("I made it here from New Team!");
+		
+		//Pull out the name of the team from the form info and use it to create a new instance of a Team.
 		String teamName = request.getParameter("teamName");
 		Team team = new Team(teamName);
+		System.out.println("The name of my new team is "+team.getName());
+		
+		//Now that we have a new Team instance, add it to our Roster.
 		Roster roster = (Roster)session.getAttribute("roster");
 		roster.addTeam(team);
-		System.out.println("The name of my new team is "+team.getName());
-		doGet(request, response);
+		
+		//Once this processing is complete, show the complete list of teams. We should see our new team on the page!
+		response.sendRedirect("/TeamRoster/Home");
 	}
 
 }

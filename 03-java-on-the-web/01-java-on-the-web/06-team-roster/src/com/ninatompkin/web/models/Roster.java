@@ -12,6 +12,10 @@ public class Roster {
 	public Roster() {
 	}
 	
+	public ArrayList<Team> getTeams(){
+		return this.teams;
+	}
+	
 	public void addTeam(String teamName) {
 		Team team = new Team(teamName);
 		addTeam(team);

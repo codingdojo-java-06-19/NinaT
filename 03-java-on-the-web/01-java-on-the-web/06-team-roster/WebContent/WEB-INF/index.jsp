@@ -6,6 +6,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="styles.css">
+	  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<title>Roster</title>
 </head>
 	<body>
@@ -18,21 +19,13 @@
 				<th>Players</th>
 				<th>Action</th>
 			</tr>
+			<c:forEach items="${roster.getTeams()}" var="team">
 			<tr>
-				<td>Ninjas</td>
-				<td>2</td>
+				<td>${team.teamName}</td>
+				<td>${team.getPlayers().size()}</td>
 				<td><a href="Teams?id<c:out value="${team.id}"/>">Details</a>  | <a href="DeleteTeam?id<c:out value="${team.id}"/>">Delete</a></td>
 			</tr>
-			<tr>
-				<td>Samurai</td>
-				<td>5</td>
-				<td><a href="Teams?id=0">Details</a>  | <a href="DeleteTeam?id=0">Delete</a></td>
-			</tr>
-			<tr>
-				<td>Knights</td>
-				<td>4</td>
-				<td><a href="Teams">Details</a>  | <a href="DeleteTeam">Delete</a></td>
-			</tr>
+			</c:forEach>
 		</table>
 	</div>
 	</body>

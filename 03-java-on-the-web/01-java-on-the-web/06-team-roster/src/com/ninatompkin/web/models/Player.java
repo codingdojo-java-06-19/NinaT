@@ -4,18 +4,23 @@ public class Player {
 	private String firstName;
 	private String lastName;
 	private int age;
-	
-	//This method is for setting any default values if we want something to be created without any passed in content;
-	public Player() {
-	}
+	//This will keep track of all the players created. This is "Static" so that all instances have access to the same information (rather than specific for this instance)
+	private static int playerCount=0;
+	private int id;
 	
 	//This method is for taking in variables and creating a new Player with those variables
 	public Player(String firstName, String lastName, int age) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
+		//As we increment players, each new player created will have a default value (which is id) of that number.
+		//i.e. the first player created will have an id of 0, 2nd will have an id of 1...etc
+		id = playerCount++;
 	}
 	
+	public int getid() {
+		return this.id;
+	}
 
 	public String getFirstName() {
 		return this.firstName;

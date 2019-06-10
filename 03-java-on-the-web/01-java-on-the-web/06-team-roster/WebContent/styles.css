@@ -13,6 +13,20 @@ a{
 	color:blue;
 }
 
+.short-form{
+	display:inline-block;
+}
+
+.normal-link{
+	background:none;
+     color: blue;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     text-decoration: underline;
+     cursor: pointer;
+}
+
 .header{
 	display:inline-block;
 	font-size:1em;
@@ -85,16 +99,6 @@ input[type=text], input[type=number]{
 	font-size:1em;
 }
 
-input[type=submit]{
-	padding:5px;
-	background-color:white;
-	box-shadow:2px 3px;
-	display:block;
-	margin-top:20px;
-	margin-right:25px;
-	margin-left:auto;
-}
-
 .player-btn{
 	padding:5px;
 	background-color:white;
@@ -102,5 +106,5 @@ input[type=submit]{
 	display:block;
 	margin-top:20px;
 	margin-right:25px;
-	margin-left: 50px;
+	margin-left: auto;
 }

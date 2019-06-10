@@ -15,7 +15,7 @@
 				<form action="Home" method="POST" autocomplete="off">
 					<label for="teamName">Team Name:</label>
 					<input type="text" name="teamName"/>
-					<input type="submit" value="Create">
+					<input class="player-btn" type="submit" value="Create">
 			</form>
 			</div>
 		</div>

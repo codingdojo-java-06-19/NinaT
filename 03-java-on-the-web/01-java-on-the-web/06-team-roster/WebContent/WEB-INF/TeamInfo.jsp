@@ -28,7 +28,7 @@
 					<form action="DeletePlayer?teamid=${thisTeam.getId()}" method="POST">
 						<!-- <input type="hidden" name="teamid" value="<c:out value="${thisTeam.getId()}"/>">-->
 						<input type="hidden" name="playerid" value="<c:out value="${player.getid()}"/>">
-						<input type="submit" value="Delete">
+						<input class="normal-link" type="submit" value="Delete">
 					</form>
 				</td>
 			</tr>

@@ -24,7 +24,11 @@
 			<tr>
 				<td>${team.getName()}</td>
 				<td>${team.getPlayers().size()}</td>
-				<td><a href="Teams?id=<c:out value="${team.getId()}"/>">Details</a>  | <a href="DeleteTeam?id<c:out value="${team.id}"/>">Delete</a></td>
+				<td><a href="Teams?id=<c:out value="${team.getId()}"/>">Details</a>  |
+					<form class="short-form" action="DeleteTeam?teamid=${team.getId()}" method="POST">
+						<input class="normal-link" type="submit" value="Delete">
+					</form>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

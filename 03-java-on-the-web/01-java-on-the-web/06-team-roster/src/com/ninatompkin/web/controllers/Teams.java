@@ -32,12 +32,14 @@ public class Teams extends HttpServlet {
 		//This statement is checking if we've passed an id in with our url. If we have, that means we're looking at one specific team. 
 		//If we haven't, it means we're looking at the list of all teams.
 		System.out.println("id is "+id);
+		System.out.println("I'm over here in the Teams Controller!");
 		if (id != null) {
 			//In order to render this specific teams info in our view, we have to use our roster's "getOneTeam" method to return information about the team with id we passed in.
 			Roster roster = (Roster)session.getAttribute("roster");
+			
 			Team thisTeam = roster.getOneTeam(id);
 			//We'll add this team into request so that we can access it in our view...
-			request.setAttribute("team", thisTeam);
+			request.setAttribute("thisTeam", thisTeam);
 			
 			//And we'll also add this team into session so that we can access it in our Players Controller 
 			session.setAttribute("team", thisTeam);

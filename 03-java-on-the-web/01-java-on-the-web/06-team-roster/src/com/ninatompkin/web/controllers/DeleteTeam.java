@@ -26,7 +26,7 @@ public class DeleteTeam extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("I made it to Delete teams! Now I'm going back to home!");
+		System.out.println("I made it to the Delete a Team Page! Now I'm going back home!");
 		response.sendRedirect("/TeamRoster/Home");
 	}
 

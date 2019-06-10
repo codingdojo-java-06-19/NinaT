@@ -51,6 +51,14 @@ public class Roster {
 		removeTeam(Integer.parseInt(id));
 	}
 	
+	public void removePlayerFromTeam(String teamId, String playerId) {
+		removePlayerFromTeam(Integer.parseInt(teamId), Integer.parseInt(playerId));
+	}
+	
+	public void removePlayerFromTeam(int teamId, int playerId) {
+		Team team = getOneTeam(teamId);
+		team.removePlayer(playerId);
+	}
 	
 	
 }

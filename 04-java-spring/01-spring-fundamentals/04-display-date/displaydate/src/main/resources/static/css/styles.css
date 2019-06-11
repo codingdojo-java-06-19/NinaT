@@ -1,0 +1,33 @@
+*{
+	margin:0;
+	padding:0;
+	font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+	
+}
+
+.container{
+	width: 50%;
+	margin:100px auto 50px auto;
+	text-align:center;
+	
+}
+
+.date-color{
+	color:#42adf4;
+}
+
+.time-color{
+	color:#079628;
+}
+
+.left-link{
+	color: blue;
+	float:left;
+	font-size: 1.1em;
+}
+
+.right-link{
+	color: blue;
+	float:right;
+	font-size: 1.1em;
+}

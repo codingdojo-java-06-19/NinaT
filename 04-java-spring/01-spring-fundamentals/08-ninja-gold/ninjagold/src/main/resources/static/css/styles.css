@@ -44,5 +44,13 @@ input[type="submit"]{
 .activities{
 	border:2px solid black;
 	width:100%;
+	height:300px;
 	overflow:scroll;
+}
+
+.error{
+	color:red;
+}
+.gain{
+	color:green;
 }

@@ -47,11 +47,11 @@
 				</div>
 			</div>
 			<h3>Activities:</h3>
-			<textarea class="activities">
+			<div class="activities">
 				<c:forEach items="${activities}" var="activity">
-					<p class="activity"><c:out value="${activity}"/></p>
+					<p class='${activity.contains("Ouch")? "error":"gain"}'><c:out value="${activity}"/></p>
 					</c:forEach>
-			</textarea>
+			</div>
 		</div>
 	</body>
 </html>

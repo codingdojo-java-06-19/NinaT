@@ -48,8 +48,8 @@
 			</div>
 			<h3>Activities:</h3>
 			<textarea class="activities">
-				<c:forEach items="${activities.getActivities()}" var="activity">
-					<p class="activity"></p>
+				<c:forEach items="${activities}" var="activity">
+					<p class="activity"><c:out value="${activity}"/></p>
 					</c:forEach>
 			</textarea>
 		</div>

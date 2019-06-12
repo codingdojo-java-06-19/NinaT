@@ -35,10 +35,10 @@
 }
 
 input[type="submit"]{
-border:2px solid black;	
-box-shadow:2px 3px;
-padding:5px;
-margin:5px;
+	border:2px solid black;	
+	box-shadow:2px 3px;
+	padding:5px;
+	margin:5px;
 }
 
 .activities{

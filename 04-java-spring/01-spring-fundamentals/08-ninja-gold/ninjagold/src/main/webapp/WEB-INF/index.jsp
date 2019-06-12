@@ -5,12 +5,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 	<title>Ninja Gold Game</title>
 </head>
 	<body>
 		<div class="container">
-			<h3 class="your-gold" for="gold">Your Gold: </h3>
+			<h3 class="your-gold">Your Gold: </h3>
 			<p class="gold-display"><c:out value="${gold}"/></p>
 			<div class="locations">
 				<div class="location-card">

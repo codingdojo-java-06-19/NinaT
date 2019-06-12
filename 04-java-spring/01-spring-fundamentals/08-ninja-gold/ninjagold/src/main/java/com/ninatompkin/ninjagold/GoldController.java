@@ -1,5 +1,7 @@
 package com.ninatompkin.ninjagold;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,14 +18,20 @@ public class GoldController {
 	@RequestMapping("/")
 	public String index(HttpSession session, Model model) {
 		if (session.getAttribute("gold")==null) {
-			System.out.println("No gold detected...intializing gold");
-			Integer gold = 0;
-			session.setAttribute("gold", gold);
-			model.addAttribute("gold", gold);
+			reset(session);
 		}
 		Integer gold = (Integer)session.getAttribute("gold");
+		model.addAttribute("gold", gold);
 		System.out.println("Our current gold count is "+ gold);
 		return "index.jsp";
+	}
+	
+	private void reset(HttpSession session) {
+		ArrayList<String> activityList = new ArrayList<String>();
+		System.out.println("No gold detected...intializing gold");
+		Integer gold = 0;
+		session.setAttribute("gold", gold);
+		session.setAttribute("activities", activityList);
 	}
 	
 	@RequestMapping(value="/addGold", method=RequestMethod.POST)

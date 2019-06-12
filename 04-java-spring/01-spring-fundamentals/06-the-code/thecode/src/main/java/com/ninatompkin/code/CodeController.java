@@ -20,8 +20,10 @@ public class CodeController {
 	@RequestMapping(value="/guess", method=RequestMethod.POST)
 	public String login(@RequestParam(value="codeInput") String codeGuess) {
 		if (codeGuess.equals("bushido")) {
+			System.out.println("My god, they got it right!");
 			return "redirect:/code";
 		}
+			System.out.println("Mwhaha. Still haven't cracked our code.");
 			return "redirect:/error";
 	}
 	

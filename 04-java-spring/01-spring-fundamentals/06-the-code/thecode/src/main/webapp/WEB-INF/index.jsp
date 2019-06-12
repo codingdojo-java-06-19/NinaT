@@ -6,7 +6,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<title>Insert title here</title>
+	<title>Secret Code</title>
 </head>
 	<body>
 		<div class="container">

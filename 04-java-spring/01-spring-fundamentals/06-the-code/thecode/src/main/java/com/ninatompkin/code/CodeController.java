@@ -13,25 +13,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CodeController {
 
 	@RequestMapping("/")
-	public String home(HttpSession session) {
+	public String home() {
 		return "index.jsp";
 	}
 	
 	@RequestMapping(value="/guess", method=RequestMethod.POST)
-	public String login(@RequestParam(value="codeInput") String codeGuess) {
+	public String flashMessages(@RequestParam(value="codeInput") String codeGuess, RedirectAttributes redirectAttributes) {
 		if (codeGuess.equals("bushido")) {
 			System.out.println("My god, they got it right!");
 			return "redirect:/code";
 		}
-			System.out.println("Mwhaha. Still haven't cracked our code.");
-			return "redirect:/error";
-	}
-	
-	@RequestMapping("/error")
-	public String flashMessages(RedirectAttributes redirectAttributes) {
+		System.out.println("Mwhaha. Still haven't cracked our code.");
 		redirectAttributes.addFlashAttribute("error", "You must train harder!");
 		return "redirect:/";
 	}
+
 	
 	@RequestMapping("/code")
 	public String code(HttpSession session) {

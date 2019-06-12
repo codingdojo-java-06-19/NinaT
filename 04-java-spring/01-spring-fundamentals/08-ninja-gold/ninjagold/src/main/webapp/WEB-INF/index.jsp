@@ -16,7 +16,7 @@
 				<div class="location-card">
 					<h3>Farm</h3>
 					<p>(earns 10-20 golds)</p>
-					<form action="/addGold" method="POST">
+					<form action="/gold/addGold" method="POST">
 						<input type="hidden" name="location" value="farm">
 						<input type="submit" value="Find Gold!">
 					</form>
@@ -24,7 +24,7 @@
 				<div class="location-card">
 					<h3>Cave</h3>
 					<p>(earns 5-10 golds)</p>
-					<form action="/addGold" method="POST">
+					<form action="/gold/addGold" method="POST">
 						<input type="hidden" name="location" value="cave">
 						<input type="submit" value="Find Gold!">
 					</form>
@@ -32,7 +32,7 @@
 				<div class="location-card">
 					<h3>House</h3>
 					<p>(earns 2-5 golds)</p>
-					<form action="/addGold" method="POST">
+					<form action="/gold/addGold" method="POST">
 						<input type="hidden" name="location" value="house">
 						<input type="submit" value="Find Gold!">
 					</form>
@@ -40,14 +40,18 @@
 				<div class="location-card">
 					<h3>Casino!</h3>
 					<p>(earns/takes 0-50 gold)</p>
-					<form action="/addGold" method="POST">
+					<form action="/gold/addGold" method="POST">
 						<input type="hidden" name="location" value="casino">
 						<input type="submit" value="Find Gold!">
 					</form>
 				</div>
 			</div>
 			<h3>Activities:</h3>
-			<textarea class="activities"></textarea>
+			<textarea class="activities">
+				<c:forEach items="${activities.getActivities()}" var="activity">
+					<p class="activity"></p>
+					</c:forEach>
+			</textarea>
 		</div>
 	</body>
 </html>

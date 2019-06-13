@@ -5,20 +5,19 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 	<title>Top Ten</title>
 </head>
 	<body>
 		<div class="container">
 			<div class="nav-bar">
 				<p>Top Ten Songs:</p>
-				<a href="http:localhost:8080/dashboard">Dashboard</a>
+				<a class="link-right" href="http:localhost:8080/dashboard">Dashboard</a>
 			</div>
 			<div class="topten">
-				<p>9 - Castle on a Hill - Ed Sheeran</p>
-				<p>8 - Shape of You - Ed Sheeran</p>
-				<p>7 - Fake Love - Drake</p>
-				<p>3 - Paris - Chainsmokers</p>
+			<c:forEach items="${topSongs}" var="song">
+				<p>${song.rating} - <a href="http://localhost:8080/songs/${song.id}">${song.title}</a> - ${song.artist}</p>
+			</c:forEach>
 			</div>
 		</div>
 	</body>

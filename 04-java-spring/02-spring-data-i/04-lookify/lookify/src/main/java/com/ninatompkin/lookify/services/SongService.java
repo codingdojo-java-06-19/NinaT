@@ -21,6 +21,14 @@ public class SongService {
 		return songRepo.findAll();
 	}
 	
+	public List<Song> findArtist(String search){
+		return songRepo.findByArtistContaining(search);
+	}
+	
+	public List<Song> findTopTen(){
+		return songRepo.findTop10ByOrderByRatingDesc();
+	}
+	
 	//creates a Song
 	public Song addSong(Song song) {
 		return songRepo.save(song);
@@ -46,5 +54,13 @@ public class SongService {
 		return songRepo.save(songFromDB);
 	}
 	
+	public Song updateSong(Song song) {
+		songRepo.save(song);
+		return song;
+	}
 	
+	public void deleteSong(Long id) {
+		songRepo.deleteById(id);
+	}
+
 }

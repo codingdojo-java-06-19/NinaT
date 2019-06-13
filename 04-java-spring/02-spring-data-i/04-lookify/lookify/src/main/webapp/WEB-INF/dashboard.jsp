@@ -13,7 +13,7 @@
 			<div class="nav-bar">
 				<a href="http://localhost:8080/songs/new">Add New</a>
 				<a href="http://localhost:8080/search/topTen">Top Songs</a>
-				<form action="/search/artist" method="POST" autocomplete="off">
+				<form action="/search" method="POST" autocomplete="off">
 					<input type="search" name="searchQuery">
 					<input type="submit" value="Search Artists">
 				</form>
@@ -25,18 +25,17 @@
 					<th>Rating</th>
 					<th>Actions</th>
 				</tr>
-				<tr>
-					<a href="#"><td>Shape of You</td></a>
-					<td>Ed Sheeran</td>
-					<td>Rating</td>
-					<a href="#"><td>Delete</td></a>
-				</tr>
 				<c:forEach items="${songs}" var="song">
 					<tr>
-            			<a href="#"><td><c:out value="${song.title}"/></td></a>
+            			<td><a href="http://localhost:8080/songs/${song.id}"><c:out value="${song.title}"/></a></td>
             			<td><c:out value="${song.artist}"/></td>
             			<td><c:out value="${song.rating}"/></td>
-            			<a href="#"><td>Delete</td></a>
+            			<td>
+            				<form action="/songs/${song.id}" method="post">
+	    						<input type="hidden" name="_method" value="delete">
+	    						<input class="link-style" type="submit" value="Delete">
+							</form>
+						</td>
         			</tr>
         		</c:forEach>
 			</table>

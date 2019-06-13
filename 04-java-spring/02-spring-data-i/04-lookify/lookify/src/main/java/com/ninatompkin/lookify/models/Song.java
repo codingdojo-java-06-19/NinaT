@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -24,13 +25,14 @@ public class Song {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	
-	@Min(5)
+	@Size(min=5, message="Title should be at least 5 characters.")
 	private String title;
 	
-	@Min(5)
+	@Size(min=5, message="Artist name should be at least 5 characters.")
 	private String artist;
 	
-	@Size(min=1, max=10)
+	@Min(1)
+	@Max(10)
 	private Integer rating;
 	
 	@Column(updatable=false)
@@ -71,6 +73,10 @@ public class Song {
 		return rating;
 	}
 
+	public void setRating(String rating) {
+		this.rating = Integer.parseInt(rating);
+	}
+	
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}

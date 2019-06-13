@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 	<title>Add Song</title>
 </head>
 	<body>
 		<div class="container">
 			<div class="nav-bar">
-				<a href="http://localhost:8080/dashboard">Dashboard</a>
+				<a class="link-right" href="http://localhost:8080/dashboard">Dashboard</a>
 			</div>
 			<div class="details box">
-				<form class="form-with-cols" action="" method="POST" autocomplete="off">
+				<form:form class="form-with-cols" action="/songs" method="POST" modelAttribute="song">
 					<div class="row">
 						<div class="col-25">
 							<label for="title">Title</label>
@@ -42,7 +42,7 @@
 					<div class="row">
 						<input type="submit" value="Add Song">
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</body>

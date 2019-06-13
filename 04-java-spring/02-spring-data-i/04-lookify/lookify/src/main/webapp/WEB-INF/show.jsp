@@ -5,7 +5,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 	<title>Details</title>
 </head>
 	<body>
@@ -19,7 +19,7 @@
 						<p>Title</p>
 					</div>
 					<div class="col-75">
-						<p>Fake Love</p>
+						<p>${song.title}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -27,7 +27,7 @@
 						<p>Artist</p>
 					</div>
 					<div class="col-75">
-						<p>Drake</p>
+						<p>${song.artist}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -35,10 +35,15 @@
 						<p>Rating(1-10)</p>
 					</div>
 					<div class="col-75">
-						<p>7</p>
+						<p>${song.rating}</p>
 					</div>
 				</div>
-				<a href="">Delete</a>
+				<div class="row">
+					<form action="/songs/${song.id}" method="post">
+	    				<input type="hidden" name="_method" value="delete">
+	    				<input class="link-style" type="submit" value="Delete">
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>

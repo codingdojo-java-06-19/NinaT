@@ -9,6 +9,10 @@
 	width:80%;	
 }
 
+a{
+	color:blue;
+}
+
 /* Start index */
 
 .index{
@@ -28,7 +32,7 @@
 	margin-bottom:20px;
 }
 
-.nav-bar a, .nav-bar form{
+.nav-bar a, .nav-bar form, .nav-bar p{
 	display:inline-block;
 	margin-right: 40px;
 }
@@ -48,31 +52,99 @@
 	box-shadow:2px 3px;
 }
 
-.songs {
+.songs, .search-table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-.songs td, .songs th {
+.songs td, .songs th, .search-table td, .search-table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.songs tr:nth-child(even){background-color: #f2f2f2;}
+.songs tr:nth-child(even), .search-table tr:nth-child(even){background-color: #f2f2f2;}
 
-.songs tr:hover {background-color: #ddd;}
+.songs tr:hover, .search-table tr:hover {background-color: #ddd;}
 
-.songs th {
+.songs th, .search-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: grey;
   color: white;
+}
+
+.link-style{
+	color:blue;
+	text-decoration:underline;
 }
 
 /* Start New */
 
-.form-with-cols{
+.link-right{
+	float: right;
+	color:blue;
+}
+
+.form-with-cols, .details-box{
+	width:50%;
+	box-sizing: border-box;
+}
+
+.form-with-cols input[type=text]{
+	width: 100%;
+  	padding: 12px;
+  	border: 2px solid black;
+ 	resize: vertical;
+}
+
+.form-with-cols label, .details-box p {
+	padding: 12px 12px 12px 0;
+  	display: inline-block;
+}
+
+.form-with-cols input[type=submit]{
+	margin-top: 30px;
+	box-shadow:2px 3px;
+  	padding: 12px 20px;
+  	border: 2px solid black;
+  	cursor: pointer;
+  	float: right;
+}
+
+.col-25{
+	float: left;
+  	width: 25%;
+  	margin-top: 6px;
+}
+
+.col-75{
+	float: left;
+  	width: 75%;
+  	margin-top: 6px;
+}
+
+.row:after{
+	content: "";
+  	display: table;
+  	clear: both;
+}
+
+/* Start of TopTen */
+
+.topten{
 	border:1px solid black;
+	padding:10px 10px 30px 10px;
+	width:30%;
+}
+
+.topten p{
+	margin-bottom:5px;
+}
+
+/* Start of Details */
+
+.details-box input[type=submit]{
+	margin-top:40px;
 }

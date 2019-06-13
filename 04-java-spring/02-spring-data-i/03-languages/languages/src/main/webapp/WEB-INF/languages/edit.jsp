@@ -9,7 +9,7 @@
 </head>
 	<body>
 		<h1>Edit Language</h1>
-		<form:form action="/languages/${language.id}" method="post" modelAttribute="book">
+		<form:form action="/languages/${language.id}" method="post" modelAttribute="language">
 		    <input type="hidden" name="_method" value="put">
 		    <p>
 		        <form:label path="name">Name</form:label>

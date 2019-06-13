@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ninatompkin.languages.models.Language;
 import com.ninatompkin.languages.services.LanguageService;
 
+@Controller
 public class LanguagesController {
 	private final LanguageService langService;
 	

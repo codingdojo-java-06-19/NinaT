@@ -3,11 +3,14 @@ package com.ninatompkin.languages.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.ninatompkin.languages.models.Language;
 import com.ninatompkin.languages.repositories.LanguageRepository;
 
+@Service
 public class LanguageService {
-private final LanguageRepository langRepo;
+	private final LanguageRepository langRepo;
 	
 	public LanguageService(LanguageRepository langRepo) {
 		this.langRepo = langRepo;

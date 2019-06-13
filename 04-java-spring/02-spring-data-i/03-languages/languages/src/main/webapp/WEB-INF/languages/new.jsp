@@ -9,7 +9,7 @@
 </head>
 	<body>
 	<h1>New Language</h1>
-		<form:form action="/languages" method="post" modelAttribute="book">
+		<form:form action="/languages" method="post" modelAttribute="language">
 		    <p>
 		        <form:label path="name">Name</form:label>
 		        <form:errors path="name"/>

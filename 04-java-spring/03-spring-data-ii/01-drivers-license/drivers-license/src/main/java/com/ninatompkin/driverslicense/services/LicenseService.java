@@ -1,6 +1,6 @@
 package com.ninatompkin.driverslicense.services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,24 @@ public class LicenseService {
 	public LicenseService(LicenseRepository licenseRepo) {
 		this.licenseRepo = licenseRepo;
 	}
-	
-	public void createLicense(License license) {
-		licenseRepo.save(license);
-		Long id = license.getId();
-        License thisLicense = licenseRepo.findById(id)
-        thisLicense.setNumber(String.format("%06d", license.getId()));
-        licenseRepo.save(thisLicense);
+	//Retrieving all licenses
+	public List<License> findAll(){
+		return licenseRepo.findAll();
 	}
 	
+	//Retrieve a single license
+	public void createLicense(License license) {
+		Long number = licenseRepo.count();
+		license.setNumber(String.format("%06d",  number));
+		licenseRepo.save(license);
+	}
+	
+	//Return a single license
+	public License findById(Long id) {
+		return licenseRepo.findById(id).orElse(null);
+	}
+	
+
 	public void joinPerson(License license, Person person) {
 		license.setPerson(person);
 		licenseRepo.save(license);

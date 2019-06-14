@@ -28,7 +28,7 @@ public class LicenseController {
 	}
 	
 	@RequestMapping("/new")
-	public String newLicense(Model model) {
+	public String newLicense(@ModelAttribute("license") License license, Model model) {
 		System.out.println("Welcome to the new licenses page!");
 		List<Person> persons = personService.allPeople();
 		model.addAttribute("persons", persons);

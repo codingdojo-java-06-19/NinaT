@@ -10,7 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="persons")
@@ -21,16 +25,23 @@ public class Person {
  private Long id;
  private String firstName;
  private String lastName;
+ 
  @Column(updatable=false)
+ @DateTimeFormat(pattern="yyyy-MM-dd")
  private Date createdAt;
+ @DateTimeFormat(pattern="yyyy-MM-dd")
  private Date updatedAt;
+ 
  @OneToOne(mappedBy="person", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
  private License license;
+ 
+ 
+
  
  public Person() {
      
  }
-
+ 
 	public Long getId() {
 		return id;
 	}
@@ -69,6 +80,16 @@ public class Person {
 	
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+	
+	@PrePersist
+	protected void onCreate() {
+		createdAt = new Date();
+	}
+	
+	@PostPersist
+	protected void onUpdate() {
+		updatedAt = new Date();
 	}
 
 }

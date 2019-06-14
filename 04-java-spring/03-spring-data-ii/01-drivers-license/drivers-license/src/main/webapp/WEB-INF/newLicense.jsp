@@ -12,13 +12,13 @@
 	<div class="container">
 			<h1>New License</h1>
 			<form:form action="/licenses/new" method="POST" modelAttribute="license" autocomplete="off">
-				<form:hidden path="number"></form:hidden>
+				
 				<div class="row">
 					<div class="col-25">
 						<label for="person">Person:</label>
 					</div>
 					<div class="col-75">
-						<select name="person">
+						<select name="person" path="person">
 							<c:forEach items="${persons}" var="person">
 								<option value="<c:out value="${person.id}"/>"><c:out value="${person.firstName}"/> <c:out value="${person.lastName}"/></option>
 						  	</c:forEach>
@@ -30,7 +30,7 @@
 						<label for="state">State:</label>
 					</div>
 					<div class="col-75">
-						<input type="text" name="state"/>
+						<input type="text" name="state" path="state"/>
 					</div>
 				</div>
 				<div class="row">
@@ -38,7 +38,7 @@
 						<label for="expDate">Expiration Date:</label>
 					</div>
 					<div class="col-75">
-						<input type="date" name="expirationDate"/>
+						<input type="date" name="expirationDate" path="expirationDate"/>
 					</div>
 				</div>
 				<div class="row">

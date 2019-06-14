@@ -28,7 +28,7 @@ public class PersonService {
 	}
 	
 	//Returns all people who don't have licenses
-	public List<Person> getPersonsNoLicense(){
+	public List<Person> getAllWithNoLicense(){
 		return personRepo.findAllByLicenseIsNull();
 	}
 	

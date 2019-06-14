@@ -30,7 +30,7 @@ public class LicenseController {
 	@RequestMapping("/new")
 	public String newLicense(@ModelAttribute("license") License license, Model model) {
 		System.out.println("Welcome to the new licenses page!");
-		List<Person> persons = personService.allPeople();
+		List<Person> persons = personService.getAllWithNoLicense();
 		model.addAttribute("persons", persons);
 		return "newLicense.jsp";
 	}

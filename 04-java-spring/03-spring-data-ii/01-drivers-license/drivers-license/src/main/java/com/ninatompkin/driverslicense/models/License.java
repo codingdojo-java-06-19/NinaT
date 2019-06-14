@@ -30,11 +30,13 @@ public class License {
  
  private String number;
  
+ @DateTimeFormat(pattern="yyyy-MM-dd")
  private Date expirationDate;
  
  private String state;
  
  @Column(updatable=false)
+ 
  @DateTimeFormat(pattern="yyyy-MM-dd")
  private Date createdAt;
  @DateTimeFormat(pattern="yyyy-MM-dd")

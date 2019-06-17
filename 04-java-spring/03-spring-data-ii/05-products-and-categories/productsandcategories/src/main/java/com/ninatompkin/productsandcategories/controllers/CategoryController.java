@@ -55,6 +55,8 @@ public class CategoryController {
 		//Pull out all of the products associated with this specific product
 		List<Product> unaddedProducts = productService.findProductsWithoutThisCategory(category);
 		model.addAttribute("productsNotYetAdded", unaddedProducts);
+		List<Product> addedProducts = category.getProducts();
+		model.addAttribute("productsAdded", addedProducts);
 		return "categories/show.jsp";
 	}
 	

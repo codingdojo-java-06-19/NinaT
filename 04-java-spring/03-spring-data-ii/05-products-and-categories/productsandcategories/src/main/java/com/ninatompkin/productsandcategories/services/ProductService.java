@@ -6,14 +6,17 @@ import org.springframework.stereotype.Service;
 
 import com.ninatompkin.productsandcategories.models.Category;
 import com.ninatompkin.productsandcategories.models.Product;
+import com.ninatompkin.productsandcategories.repositories.CategoryRepository;
 import com.ninatompkin.productsandcategories.repositories.ProductRepository;
 
 @Service
 public class ProductService {
 	private final ProductRepository productRepo;
+	private final CategoryRepository categoryRepo;
 	
-	public ProductService(ProductRepository productRepo) {
+	public ProductService(ProductRepository productRepo, CategoryRepository categoryRepo) {
 		this.productRepo = productRepo;
+		this.categoryRepo = categoryRepo;
 	}
 	
 	//Retrieving all Products
@@ -36,11 +39,17 @@ public class ProductService {
 		return productRepo.save(product);
 	}
 	
-	//Add a new category to a product
 	public void addCategoryToProduct(Category category, Product product) {
 		product.addCategory(category);
 		createOrUpdateProduct(product);
 	}
+	
+	public void addCategoryToProduct(Long product_id, Long category_id) {
+		Product product = findOne(product_id);
+		Category category = categoryRepo.findById(category_id).orElse(null);
+		addCategoryToProduct(category, product);
+	}
+
 	
 	
 }

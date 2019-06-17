@@ -21,13 +21,13 @@
 					</ul>
 				</div>
 				<div class="col">
-					<form:form action="/products/addCategory/<c:out value="${product.id}"/>" method="POST" modelAttribute="category" autocomplete="off">
+					<form:form action="/products/addCategory/${product.id}" method="POST" modelAttribute="category" autocomplete="off">
 						<div class="row">
 							<div class="col-25">
 								<label for="category">Add Category:</label>
 							</div>
 							<div class="col-75">
-								<select name="categories" path="category">
+								<select name="category">
 									<c:forEach items="${categoriesNotYetAdded}" var="category">
 										<option value="<c:out value="${category.id}"/>"><c:out value="${category.name}"/></option>
 									</c:forEach>

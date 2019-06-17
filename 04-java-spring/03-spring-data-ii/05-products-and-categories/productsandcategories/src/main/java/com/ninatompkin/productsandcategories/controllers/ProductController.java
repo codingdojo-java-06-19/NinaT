@@ -53,34 +53,18 @@ public class ProductController {
 		//Pull out all of the categories associated with this specific product
 		List<Category> unaddedCategories = categoryService.findCategoriesWithoutThisProduct(product);
 		model.addAttribute("categoriesNotYetAdded", unaddedCategories);
+		List<Category> addedCategories = product.getCategories();
+		model.addAttribute("categoriesAdded", addedCategories);
 		return "products/show.jsp";
 	}
 	
 	@RequestMapping(value="/addCategory/{id}", method=RequestMethod.POST)
-	public String addCategoryToProduct(@Valid @ModelAttribute("category") Category category, BindingResult result, @RequestParam("product_id") String product_id) {
-		if(result.hasErrors()) {
-			//If errors, redirect to the same page we were looking at
-			return "redirect:/categories/"+product_id;
-		}
+	//Could either use hidden variable for product id and pull it out with RequestParam, or in url with Path Variable
+	public String addCategoryToProduct(@RequestParam("category") Long category_id, @PathVariable("id") Long product_id) {
 
 		//Use the parameter id to get the Product we're going to update
-		Long id = Long.parseLong(product_id);
-		Product thisProduct = productService.findOne(id);
-		
-		//Get all of its current categories
-		List<Category> categoryList = thisProduct.getCategories();
-		
-		//Add the category we chose to the list
-		categoryList.add(category);
-		
-		//Now that we've added a new product to the list, we have to "redefine" the list of products with a set.
-		thisProduct.setCategories(categoryList);
-		
-		//Finally, we can "save" our product
-		productService.createOrUpdateProduct(thisProduct);
-		
-		return "redirect:/categories/"+product_id; 
+		productService.addCategoryToProduct(product_id, category_id);	
+		return "redirect:/products/"+product_id; 
 	}
-	
 
 }

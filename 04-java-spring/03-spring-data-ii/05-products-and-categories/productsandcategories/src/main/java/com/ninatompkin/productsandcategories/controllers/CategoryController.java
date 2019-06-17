@@ -40,7 +40,7 @@ public class CategoryController {
 			return "redirect:/categories/new";
 		}
 		else {
-			categoryService.addCategory(category);
+			categoryService.createOrUpdateCategory(category);
 			return "redirect:/categories/"+category.getId(); 
 		}	
 	}
@@ -58,29 +58,12 @@ public class CategoryController {
 		return "categories/show.jsp";
 	}
 	
-	@RequestMapping(value="/addProduct/", method=RequestMethod.POST)
-	public String addProductToCategory(@Valid @ModelAttribute("product") Product product, BindingResult result, @RequestParam("category_id") String category_id) {
-		if(result.hasErrors()) {
-			//If errors, redirect to the same page we were looking at
-			return "redirect:/categories/"+category_id;
-		}
-		
-		//Otherwise, use the id to get the Category we're going to update
-		Long id = Long.parseLong(category_id);
-		Category thisCategory = categoryService.findOne(id);
-		
-		//Get all of its current products
-		List<Product> productList = thisCategory.getProducts();
-		
-		//Add the product we just created to the list
-		productList.add(product);
-		
-		//Now that we've added a new product to the list, we have to "redefine" the list of products with a set.
-		thisCategory.setProducts(productList);
-		
-		//Finally, we can "save" our category
-		categoryService.updateCategory(thisCategory);
-		
+	@RequestMapping(value="/addProduct/{id}", method=RequestMethod.POST)
+	//Could either use hidden variable for category id and pull it out with RequestParam, or in url with Path Variable
+	public String addProductToCategory(@RequestParam("product") Long product_id, @PathVariable("id") Long category_id) {
+
+		//Use the parameter id to get the Category we're going to update
+		categoryService.addProductToCategory(category_id, product_id);		
 		return "redirect:/categories/"+category_id; 
 	}
 	

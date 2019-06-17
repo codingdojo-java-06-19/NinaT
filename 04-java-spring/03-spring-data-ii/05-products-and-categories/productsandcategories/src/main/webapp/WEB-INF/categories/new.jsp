@@ -24,7 +24,6 @@
 				<div class="row">
 					<input type="submit" value="Create"/>
 				</div>
-			
 			</form:form>
 		</div>
 	</body>

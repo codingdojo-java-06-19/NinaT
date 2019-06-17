@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,7 +21,7 @@
 					</ul>
 				</div>
 				<div class="col">
-					<form:form action="/products/addCategory" method="POST" modelAttribute="category" autocomplete="off">
+					<form:form action="/products/addCategory/<c:out value="${product.id}"/>" method="POST" modelAttribute="category" autocomplete="off">
 						<div class="row">
 							<div class="col-25">
 								<label for="category">Add Category:</label>

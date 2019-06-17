@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import com.ninatompkin.productsandcategories.models.Category;
 import com.ninatompkin.productsandcategories.models.Product;
 import com.ninatompkin.productsandcategories.repositories.CategoryRepository;
+import com.ninatompkin.productsandcategories.repositories.ProductRepository;
 
 @Service
 public class CategoryService {
 	private final CategoryRepository categoryRepo;
+	private final ProductRepository productRepo;
 	
-	public CategoryService(CategoryRepository categoryRepo) {
+	public CategoryService(CategoryRepository categoryRepo, ProductRepository productRepo) {
 		this.categoryRepo = categoryRepo;
+		this.productRepo = productRepo;
 	}
 	
 	//Retrieve all Categories
@@ -26,8 +29,8 @@ public class CategoryService {
 		return categoryRepo.findById(id).orElse(null);
 	}
 		
-	//create a category
-	public Category addCategory(Category category) {
+	//create (or update?) a category
+	public Category createOrUpdateCategory(Category category) {
 		return categoryRepo.save(category);
 	}
 	
@@ -36,10 +39,16 @@ public class CategoryService {
 		return categoryRepo.findByProductsNotContains(product);
 	}
 	
-	//Update a Category with a new Product
-	public void updateCategory(Category category) {
-		categoryRepo.save(category);
+	//Add a new product to a Category
+	public void addProductToCategory(Category category, Product product) {
+		category.addProduct(product);
+		createOrUpdateCategory(category);
 	}
 	
+	public void addProductToCategory(Long category_id, Long product_id) {
+		Category category = findOne(category_id);
+		Product product = productRepo.findById(product_id).orElse(null);
+		addProductToCategory(category, product);
+	}
 
 }

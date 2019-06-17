@@ -16,6 +16,8 @@ import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="products")
 public class Product {
@@ -29,6 +31,7 @@ public class Product {
     private Date createdAt;
     private Date updatedAt;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
         name = "categories_products", 
         joinColumns = @JoinColumn(name = "product_id"), 
@@ -86,6 +89,10 @@ public class Product {
 
 	public List<Category> getCategories() {
 		return categories;
+	}
+	
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 	
 	public void addCategory(Category category) {

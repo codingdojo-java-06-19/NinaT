@@ -31,12 +31,16 @@ public class ProductService {
 		return productRepo.findById(id).orElse(null);
 	}
 	
-	//Create a product
-	public Product addProduct(Product product) {
+	//Create (or update?) a product
+	public Product createOrUpdateProduct(Product product) {
 		return productRepo.save(product);
 	}
 	
-	//Update a Product with a new Category
-	//???
+	//Add a new category to a product
+	public void addCategoryToProduct(Category category, Product product) {
+		product.addCategory(category);
+		createOrUpdateProduct(product);
+	}
+	
 	
 }

@@ -16,6 +16,8 @@ import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="categories")
 public class Category {
@@ -29,6 +31,7 @@ public class Category {
     private Date updatedAt;
     
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
         name = "categories_products", 
         joinColumns = @JoinColumn(name = "category_id"), 

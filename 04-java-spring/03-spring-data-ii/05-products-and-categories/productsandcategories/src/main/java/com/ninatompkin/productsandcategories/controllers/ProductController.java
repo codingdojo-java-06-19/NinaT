@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ninatompkin.productsandcategories.models.Category;
 import com.ninatompkin.productsandcategories.models.Product;
@@ -38,7 +39,7 @@ public class ProductController {
 		if(result.hasErrors()) {
 			return "products/new.jsp";
 		}
-		productService.addProduct(product);
+		productService.createOrUpdateProduct(product);
 		return "redirect:/products/"+product.getId();
 	}
 	
@@ -55,13 +56,30 @@ public class ProductController {
 		return "products/show.jsp";
 	}
 	
-	@RequestMapping(value="/addCategory", method=RequestMethod.POST)
-	public String addCategoryToProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+	@RequestMapping(value="/addCategory/{id}", method=RequestMethod.POST)
+	public String addCategoryToProduct(@Valid @ModelAttribute("category") Category category, BindingResult result, @RequestParam("product_id") String product_id) {
 		if(result.hasErrors()) {
-			return "redirect:/categories/"+product.getId();
+			//If errors, redirect to the same page we were looking at
+			return "redirect:/categories/"+product_id;
 		}
-		productService.addProduct(product);
-		return "redirect:/categories/"+product.getId(); 
+
+		//Use the parameter id to get the Product we're going to update
+		Long id = Long.parseLong(product_id);
+		Product thisProduct = productService.findOne(id);
+		
+		//Get all of its current categories
+		List<Category> categoryList = thisProduct.getCategories();
+		
+		//Add the category we chose to the list
+		categoryList.add(category);
+		
+		//Now that we've added a new product to the list, we have to "redefine" the list of products with a set.
+		thisProduct.setCategories(categoryList);
+		
+		//Finally, we can "save" our product
+		productService.createOrUpdateProduct(thisProduct);
+		
+		return "redirect:/categories/"+product_id; 
 	}
 	
 

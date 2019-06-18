@@ -95,17 +95,24 @@ public class QuestionController {
 	public String showQuestion(@PathVariable("id") Long question_id, Model model, @ModelAttribute("answer") Answer answer) {
 		//To render the page, we first must fetch the question we've selected from our DB...
 		Question thisQuestion = questionService.showOne(question_id);
-		//...and add it to our model so it can be rendered in our JSP.
+		
+		//However, if there isn't a question with that id...then we need to redirect back to the dashboard
+		if(thisQuestion==null) {
+			return "redirect:/questions/dashboard";
+		}
+		//Otherwise, we found a matching question, so we'll add it to our model so it can be rendered in our JSP.
 		model.addAttribute("question", thisQuestion);
 		//We also need to find all of the answers associated with this question...
 		List<Answer> thisQuestionsAnswers = thisQuestion.getAnswers();
 		//..and add them to our model.
 		model.addAttribute("answers", thisQuestionsAnswers);
-		
+		//Same thing with our Tags
+		List<Tag> thisQuestionsTags = thisQuestion.getTags();
+		model.addAttribute("tags", thisQuestionsTags);
 		return "questions/show.jsp";
 	}
 	
-	@RequestMapping("/answer")
+	@RequestMapping(value="/answer", method=RequestMethod.POST)
 	public String addAnswerToQuestion(Model model, @RequestParam("question_id") Long question_id, @RequestParam("content") String answerContent) {
 		
 		//Use the parameters submitted through our form to populate a new Answer with content...
@@ -116,7 +123,7 @@ public class QuestionController {
 		//Finally, add the answer to our question using the id we passed via our form parameters...
 		answerService.addAnswerToquestion(question_id, newAnswer);
 		
-		//...and then save the question and referesh the page so we can see the answer added.
+		//...and then save the question and refresh the page so we can see the answer added.
 		Question thisQuestion = questionService.showOne(question_id);
 		questionService.createOrUpdateQuestion(thisQuestion);
 		

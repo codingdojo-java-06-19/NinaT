@@ -24,6 +24,10 @@ public class AnswerService {
 		return questionRepo.findById(id).orElse(null);
 	}
 	
+	public void saveAnswer(Answer answer) {
+		answerRepo.save(answer);
+	}
+	
 	//Add Answer To Question with Question ID
 	public void addAnswerToquestion(Long question_id, Answer answer) {
 		Question thisQuestion = findOne(question_id);

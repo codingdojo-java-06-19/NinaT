@@ -18,7 +18,7 @@
 				</tr>
 				<c:forEach items="${questions}" var="question">
 				<tr>
-					<td><a href="/">${question.content}</a></td>
+					<td><a href="http://localhost:8080/questions/${question.id}">${question.content}</a></td>
 					<td>${question.printTagsForQuestion()}</td>
 				</tr>
 				</c:forEach>

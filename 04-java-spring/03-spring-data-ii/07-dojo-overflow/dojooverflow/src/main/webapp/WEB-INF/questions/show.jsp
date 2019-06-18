@@ -11,10 +11,12 @@
 </head>
 	<body>
 		<div class="container">
-			<h1>What is the best programming language?</h1>
+			<h1>${question.content}</h1>
 			<div class="nav-bar">
 				<h3>Tags:</h3>
-				<div class="btn"></div>
+				<c:forEach items="tags" var="tag">
+					<div class="btn">${tag.content}</div>
+				</c:forEach>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -22,29 +24,26 @@
 						<tr>
 							<th>Answers</th>
 						</tr>
+						<c:forEach items="answers" var="answer">
 						<tr>
-							<td>something</td>
+							<td>${answer.content}</td>
 						</tr>
-						<tr>
-							<td>something</td>
-						</tr>
-						<tr>
-							<td>something</td>
-						</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<div class="col">
 					<h2>Add your answer:</h2>
-					<form action="/" method="POST" autocomplete="off">
+					<form action="/question/answer" method="POST" autocomplete="off">
 						<div class="row">
 							<div class="col-25">
 								<label for="answer">Answer:</label>
 							</div>
 							<div class="col-75">
-								<textarea></textarea>
+								<textarea name="content"></textarea>
 							</div>
 						</div>
 						<div class="row">
+							<input type="hidden" name="question_id" value="<c:out value="${question.id}"/>"/>
 							<input type="submit" value="Answer it!"/>
 						</div>
 					</form>

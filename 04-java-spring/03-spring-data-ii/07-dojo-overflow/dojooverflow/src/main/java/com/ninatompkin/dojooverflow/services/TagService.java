@@ -28,6 +28,10 @@ public class TagService {
 		addTagToQuestion(tag, question);
 	}
 	
+	public void saveTag(Tag tag) {
+		tagRepo.save(tag);
+	}
+	
 	//Add a tag to a question??? 
 	public void addTagToQuestion(Tag tag, Question question) {
 		question.addTag(tag);
@@ -43,5 +47,10 @@ public class TagService {
 	//Get all Tags for this One Question With Object
 	public List<Tag> showTagsForThisQuestion(Question question){
 		return question.getTags();
+	}
+	
+	//Find if Tag already exists in our DB
+	public Tag checkForTagInDB(String content) {
+		return tagRepo.findByContent(content);
 	}
 }

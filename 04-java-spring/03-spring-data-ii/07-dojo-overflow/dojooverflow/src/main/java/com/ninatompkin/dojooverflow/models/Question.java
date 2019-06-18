@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +27,8 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotNull
 	private String content;
 	
 	@Column(updatable=false)
@@ -41,6 +45,7 @@ public class Question {
 			joinColumns = @JoinColumn(name="question_id"),
 			inverseJoinColumns=@JoinColumn(name="tag_id")
 	)
+	@Size(max=3)
 	private List<Tag> tags;
 	
 	public Question() {

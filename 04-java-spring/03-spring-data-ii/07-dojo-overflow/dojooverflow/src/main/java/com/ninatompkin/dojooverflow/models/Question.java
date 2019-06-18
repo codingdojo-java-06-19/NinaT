@@ -46,7 +46,6 @@ public class Question {
 	public Question() {
 	}
 	
-	
 	public Long getId() {
 		return id;
 	}
@@ -74,7 +73,15 @@ public class Question {
 	public List<Tag> getTags() {
 		return tags;
 	}
-
+	
+	public String printTagsForQuestion() {
+		String tagStr = "";
+		for (Tag tag : tags) {
+			tagStr += tag.getContent()+", ";
+		}
+		return tagStr;
+	}
+	
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}

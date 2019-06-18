@@ -13,13 +13,13 @@
 		<div class="container">
 			<div class="new">
 			<h1>What is your question?</h1>
-			<form action="/" method="POST" autocomplete="off">
+			<form action="/questions/new" method="POST" modelAttribute="question" autocomplete="off">
 				<div class="row">
 					<div class="col-25">
 						<label for="question">Question:</label>
 					</div>
 					<div class="col-75">
-						<textarea></textarea>
+						<textarea name="content"></textarea>
 					</div>
 				</div>
 				<div class="row">

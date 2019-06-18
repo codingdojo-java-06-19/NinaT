@@ -16,18 +16,12 @@
 					<th>Question</th>
 					<th>Tags</th>
 				</tr>
+				<c:forEach items="${questions}" var="question">
 				<tr>
-					<td><a href="/">What is the best programming language?</a></td>
-					<td>cs, programming</td>
+					<td><a href="/">${question.content}</a></td>
+					<td>${question.printTagsForQuestion()}</td>
 				</tr>
-				<tr>
-					<td><a href="/">What is the best programming language?</a></td>
-					<td>cs, programming</td>
-				</tr>
-				<tr>
-					<td><a href="/">What is the best programming language?</a></td>
-					<td>cs, programming</td>
-				</tr>
+				</c:forEach>
 				<tr>
 					<td></td>
 					<td></td>

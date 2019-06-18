@@ -14,7 +14,7 @@
 			<h1>${question.content}</h1>
 			<div class="nav-bar">
 				<h3>Tags:</h3>
-				<c:forEach items="tags" var="tag">
+				<c:forEach items="${tags}" var="tag">
 					<div class="btn">${tag.content}</div>
 				</c:forEach>
 			</div>
@@ -24,7 +24,7 @@
 						<tr>
 							<th>Answers</th>
 						</tr>
-						<c:forEach items="answers" var="answer">
+						<c:forEach items="${answers}" var="answer">
 						<tr>
 							<td>${answer.content}</td>
 						</tr>

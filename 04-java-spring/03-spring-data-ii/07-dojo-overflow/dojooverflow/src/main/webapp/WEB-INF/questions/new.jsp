@@ -27,7 +27,7 @@
 						<label for="tags">Tags:</label>
 					</div>
 					<div class="col-75">
-						<input type="text" name="tags"/>
+						<input type="text" name="tagStrings"/>
 					</div>
 				</div>
 				<div class="row">

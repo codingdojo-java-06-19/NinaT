@@ -1,5 +1,6 @@
 package com.ninatompkin.dojooverflow.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class Question {
 	private List<Tag> tags;
 	
 	public Question() {
+		tags = new ArrayList<Tag>();
 	}
 	
 	public Long getId() {
@@ -104,6 +106,8 @@ public class Question {
 	}
 	
 	public void addTag(Tag tag) {
+		System.out.println("Tags is null"+tags==null);
+		System.out.println("tags is"+tags);
 		tags.add(tag);
 	}
 	

@@ -50,7 +50,16 @@ public class TagService {
 	}
 	
 	//Find if Tag already exists in our DB
-	public Tag checkForTagInDB(String content) {
-		return tagRepo.findByContent(content);
+	public Tag findOrCreateTag(String content) {
+		Tag foundTag = tagRepo.findByContent(content);
+		
+		if (foundTag==null) {
+			System.out.println("Tag is null");
+			foundTag = new Tag();
+			foundTag.setContent(content);
+			saveTag(foundTag);
+		}
+		System.out.println("Found tag! Tag is "+foundTag);
+		return foundTag;
 	}
 }

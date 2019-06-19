@@ -27,15 +27,11 @@ public class Country {
 	private String continent;
 	@Size(max=26)
 	private String region;
-	//How to validate 10,2 with a double in Spring?
 	private Double surface_area;
 	@Size(max=6)
 	private Short indep_year;
-	//What does 11 mean here?
 	private int population;
-	//How to validate 3,1 with a double in Spring?
 	private Double life_expectancy;
-	//How to validate 10,2 with a double in Spring?
 	private Double gnp;
 	private Double gnp_old;
 	@Size(max=45)
@@ -44,7 +40,6 @@ public class Country {
 	private String government_form;
 	@Size(max=60)
 	private String head_of_state;
-	//What does 11 mean here?
 	private int capital;
 	@Size(max=2)
 	private String code2;
@@ -54,10 +49,10 @@ public class Country {
 //	private Date createdAt;
 //	private Date updatedAt;
 
-	@OneToMany(mappedBy="language", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="country", fetch=FetchType.LAZY)
 	private List<Language> languages;
 	
-	@OneToMany(mappedBy="cities", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="country", fetch=FetchType.LAZY)
 	private List<City> cities;
 	
 	public Country() {

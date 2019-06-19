@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -18,14 +20,16 @@ public class City {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@Size(max=35)
+	private String name;
 	@Size(max=3)
 	private String country_code;
-	private String language;
-	private String is_official;
-	private Double percentage;
+	private String district;
+	private int population;
 	
-	@OneToMany(mappedBy="country", fetch=FetchType.LAZY)
-	private List<City> cities;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="country_id")
+	private Country country;
 
 	public Long getId() {
 		return id;
@@ -33,6 +37,14 @@ public class City {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCountry_code() {
@@ -43,37 +55,28 @@ public class City {
 		this.country_code = country_code;
 	}
 
-	public String getLanguage() {
-		return language;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
-	public String getIs_official() {
-		return is_official;
+	public int getPopulation() {
+		return population;
 	}
 
-	public void setIs_official(String is_official) {
-		this.is_official = is_official;
+	public void setPopulation(int population) {
+		this.population = population;
 	}
 
-	public Double getPercentage() {
-		return percentage;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setPercentage(Double percentage) {
-		this.percentage = percentage;
+	public void setCountries(Country country) {
+		this.country = country;
 	}
 
-	public List<City> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<City> cities) {
-		this.cities = cities;
-	}
-	
-	
 }

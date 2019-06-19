@@ -22,7 +22,6 @@ public class Language {
 	@Size(max=30)
 	private String language;
 	private String is_official;
-	//How to validate 4,1 with a double in Spring?
 	private Double percentage;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

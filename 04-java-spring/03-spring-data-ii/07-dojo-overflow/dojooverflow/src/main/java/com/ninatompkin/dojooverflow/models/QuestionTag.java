@@ -22,9 +22,9 @@ public class QuestionTag {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(updatable=false)
-	private Date createdAt;
-	private Date updatedAt;
+//	@Column(updatable=false)
+//	private Date createdAt;
+//	private Date updatedAt;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="question_id")
@@ -63,22 +63,22 @@ public class QuestionTag {
 		this.tag = tag;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+//	public Date getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public Date getUpdatedAt() {
+//		return updatedAt;
+//	}
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	@PrePersist
-    protected void onCreate() {
-       createdAt = new Date();
-    }
-
-    @PostPersist
-    protected void onUpdate() {
-	updatedAt = new Date();
-    }
+//	@PrePersist
+//    protected void onCreate() {
+//       createdAt = new Date();
+//    }
+//
+//    @PostPersist
+//    protected void onUpdate() {
+//	updatedAt = new Date();
+//    }
 
 }

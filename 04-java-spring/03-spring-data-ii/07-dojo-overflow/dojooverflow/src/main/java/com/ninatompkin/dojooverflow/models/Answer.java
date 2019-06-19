@@ -35,7 +35,6 @@ public class Answer {
 		
 	}
 	
-	
 	public Long getId() {
 		return id;
 	}

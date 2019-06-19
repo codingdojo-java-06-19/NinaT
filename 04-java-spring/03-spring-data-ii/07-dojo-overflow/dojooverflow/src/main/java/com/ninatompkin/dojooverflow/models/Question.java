@@ -51,6 +51,12 @@ public class Question {
 	
 	public Question() {
 		tags = new ArrayList<Tag>();
+
+	}
+	
+	public Question(String content, List<Tag> tags) {
+		this.content = content;
+		this.tags = tags;
 	}
 	
 	public Long getId() {
@@ -86,6 +92,7 @@ public class Question {
 		for (Tag tag : tags) {
 			tagStr += tag.getContent()+", ";
 		}
+		tagStr = tagStr.substring(0, tagStr.length() - 2);
 		return tagStr;
 	}
 	
@@ -106,8 +113,6 @@ public class Question {
 	}
 	
 	public void addTag(Tag tag) {
-		System.out.println("Tags is null"+tags==null);
-		System.out.println("tags is"+tags);
 		tags.add(tag);
 	}
 	

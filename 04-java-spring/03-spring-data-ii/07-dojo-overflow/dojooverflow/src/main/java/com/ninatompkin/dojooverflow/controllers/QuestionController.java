@@ -88,6 +88,7 @@ public class QuestionController {
 		List<Answer> thisQuestionsAnswers = thisQuestion.getAnswers();
 		//..and add them to our model.
 		model.addAttribute("answers", thisQuestionsAnswers);
+		System.out.println("this questions ansers are..."+thisQuestionsAnswers);
 		//Same thing with our Tags
 		List<Tag> thisQuestionsTags = thisQuestion.getTags();
 		model.addAttribute("tags", thisQuestionsTags);
@@ -95,18 +96,26 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/answer", method=RequestMethod.POST)
-	public String addAnswerToQuestion(Model model, @RequestParam("question_id") Long question_id, @RequestParam("content") String answerContent) {
+	public String addAnswerToQuestion(@ModelAttribute("answer") Answer answer, BindingResult result, @RequestParam("question_id") Long question_id, @RequestParam("content") String answerContent) {
+		if(result.hasErrors()) {
+			System.out.println("Errors: "+result);
+			return "redirect:/questions/"+question_id;
+		}
+		//Grab the question we need to update from the id passed in via the hidden input
+		Question thisQuestion = questionService.showOne(question_id);
 		
 		//Use the parameters submitted through our form to populate a new Answer with content...
-		Answer newAnswer = new Answer();
-		newAnswer.setContent(answerContent);
+		answer.setContent(answerContent);
+		answer.setQuestion(thisQuestion);
+		System.out.println("Our answer contains the following content: "+answer.getContent());
+		answerService.addAnswerToquestion(question_id, answer);
 		//...then save that answer.
-		answerService.saveAnswer(newAnswer);
-		//Finally, add the answer to our question using the id we passed via our form parameters...
-		answerService.addAnswerToquestion(question_id, newAnswer);
+		answerService.saveAnswer(answer);
 		
+		//Finally, add the answer to our question using the id we passed via our form parameters...
+		
+		System.out.println("Our question has the following answers: "+thisQuestion.getAnswers());
 		//...and then save the question and refresh the page so we can see the answer added.
-		Question thisQuestion = questionService.showOne(question_id);
 		questionService.createOrUpdateQuestion(thisQuestion);
 		
 		return "redirect:/questions/"+question_id;

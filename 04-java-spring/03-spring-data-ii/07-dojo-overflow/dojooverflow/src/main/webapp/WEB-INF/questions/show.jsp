@@ -33,20 +33,20 @@
 				</div>
 				<div class="col">
 					<h2>Add your answer:</h2>
-					<form action="/question/answer" method="POST" autocomplete="off">
+					<form:form action="/questions/answer" modelAttribute="answer" method="POST" autocomplete="off">
 						<div class="row">
 							<div class="col-25">
 								<label for="answer">Answer:</label>
 							</div>
 							<div class="col-75">
-								<textarea name="content"></textarea>
+								<textarea name="content" path="content"></textarea>
 							</div>
 						</div>
 						<div class="row">
 							<input type="hidden" name="question_id" value="<c:out value="${question.id}"/>"/>
 							<input type="submit" value="Answer it!"/>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 

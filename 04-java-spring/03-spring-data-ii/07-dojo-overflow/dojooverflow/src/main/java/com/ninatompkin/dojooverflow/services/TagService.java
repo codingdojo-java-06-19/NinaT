@@ -32,7 +32,7 @@ public class TagService {
 		tagRepo.save(tag);
 	}
 	
-	//Add a tag to a question??? 
+	//Add a tag to a question 
 	public void addTagToQuestion(Tag tag, Question question) {
 		question.addTag(tag);
 		questionRepo.save(question);

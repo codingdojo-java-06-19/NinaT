@@ -107,6 +107,7 @@ public class QuestionController {
 		//Use the parameters submitted through our form to populate a new Answer with content...
 		answer.setContent(answerContent);
 		answer.setQuestion(thisQuestion);
+		
 		System.out.println("Our answer contains the following content: "+answer.getContent());
 		answerService.addAnswerToquestion(question_id, answer);
 		//...then save that answer.

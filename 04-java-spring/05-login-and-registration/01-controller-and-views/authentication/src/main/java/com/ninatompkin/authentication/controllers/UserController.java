@@ -34,25 +34,53 @@ public class UserController {
  @RequestMapping(value="/registration", method=RequestMethod.POST)
  public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
 	 // if result has errors, return the registration page (don't worry about validations just now)
-     // else, save the user in the database, save the user id in session, and redirect them to the /home route
-	 return "redirect:/login";
+	 if(result.hasErrors()) {
+		 //errors go here!!
+		 return "registrationPage.jsp";
+	 }
+	 // else, save the user in the database...
+	 User newUser = userService.registerUser(user);
+	 //save the user id in session...
+	 session.setAttribute("userId", newUser.getId());
+	 //and redirect them to the /home routes
+	 return "redirect:/home";
  }
  
  @RequestMapping(value="/login", method=RequestMethod.POST)
  public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-     // if the user is authenticated, save their user id in session
-     // else, add error messages and return the login page
-	 return "redirect:/home";
+	// if the user is authenticated...
+	 if(userService.authenticateUser(email, password)) {
+		 //save their user id in session
+		 User user = userService.findByEmail(email);
+		 session.setAttribute("userId", user.getId());
+		 return "redirect:/home";
+     }
+    // else, add error messages...
+	 model.addAttribute("error", "Invalid Credentials. Pleae try again.");
+	//...and return the login page
+	return "redirect:/login";
  }
  
  @RequestMapping("/home")
  public String home(HttpSession session, Model model) {
-     // get user from session, save them in the model and return the home page
+	 //First, check whether or not our user is logged in!
+	 if(session.getAttribute("userId")==null) {
+		 model.addAttribute("error","You are not logged in. Please login or register to access home.");
+		 System.out.println("Uh uh girlfriend.");
+		 return "redirect:/login";
+	 }
+	 // get user from session...
+	 Long userId = (Long)session.getAttribute("userId");
+	 User thisUser = userService.findUserById(userId);
+	 //save them in the model...
+     model.addAttribute("user", thisUser);
+	 //...and return the home page
 	 return "homePage.jsp";
  }
  @RequestMapping("/logout")
  public String logout(HttpSession session) {
      // invalidate session
+	 session.invalidate();
      // redirect to login page
 	 return "redirect:/login";
  }

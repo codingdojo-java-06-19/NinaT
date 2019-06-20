@@ -14,11 +14,11 @@
     <form method="post" action="/login">
         <p>
             <label for="email">Email</label>
-            <input type="text" id="email" name="email"/>
+            <input type="text" id="email" name="email" required="true"/>
         </p>
         <p>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password"/>
+            <input type="password" id="password" name="password" required="true"/>
         </p>
         <input type="submit" value="Login!"/>
     </form>    

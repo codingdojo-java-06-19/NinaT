@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name="user")

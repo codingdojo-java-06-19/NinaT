@@ -16,15 +16,15 @@
     <form:form method="POST" action="/registration" modelAttribute="user">
         <p>
             <form:label path="email">Email:</form:label>
-            <form:input type="email" path="email"/>
+            <form:input type="email" path="email" required="true"/>
         </p>
         <p>
             <form:label path="password">Password:</form:label>
-            <form:password path="password"/>
+            <form:password path="password" required="true"/>
         </p>
         <p>
             <form:label path="passwordConfirmation">Password Confirmation:</form:label>
-            <form:password path="passwordConfirmation"/>
+            <form:password path="passwordConfirmation" required="true"/>
         </p>
         <input type="submit" value="Register!"/>
     </form:form>

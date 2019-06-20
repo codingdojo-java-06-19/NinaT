@@ -14,16 +14,18 @@ public class EmployeeAndManagerService {
 	
 	public List<Employee> getManagersEmployees(Long employee_id){
 		Employee manager = empManRepo.findById(employee_id).orElse(null);
-		if (manager.getEmployees() == null) {
+		if (manager == null && manager.getEmployees() == null) {
 			System.out.println("This is just a normal employee, not a manager! They don't have any employees.");
+			return null;
 		}
 		return manager.getEmployees();
 	}
 	
 	public Employee getMyManager(Long employee_id) {
 		Employee employee = empManRepo.findById(employee_id).orElse(null);
-		if (employee.getManager() == null) {
+		if (employee == null && employee.getManager() == null) {
 			System.out.println("This employee doesn't have a manager! Does this mean...they're the top dog!?");
+			return null;
 		}
 		return employee.getManager();
 	}

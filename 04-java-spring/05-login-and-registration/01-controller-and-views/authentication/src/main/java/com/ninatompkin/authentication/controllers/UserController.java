@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ninatompkin.authentication.models.User;
 import com.ninatompkin.authentication.services.UserService;
+import com.ninatompkin.authentication.validator.UserValidator;
 
 @Controller
 public class UserController {
 		private final UserService userService;
+		private final UserValidator userValidator;
  
- public UserController(UserService userService) {
+ public UserController(UserService userService, UserValidator userValidator) {
      this.userService = userService;
+     this.userValidator = userValidator;
  }
  
  @RequestMapping("/registration")
@@ -32,18 +35,25 @@ public class UserController {
  }
  
  @RequestMapping(value="/registration", method=RequestMethod.POST)
- public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+ public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session, Model model) {
+	 userValidator.validate(user, result);
 	 // if result has errors, return the registration page (don't worry about validations just now)
 	 if(result.hasErrors()) {
 		 //errors go here!!
 		 return "registrationPage.jsp";
 	 }
 	 // else, save the user in the database...
-	 User newUser = userService.registerUser(user);
-	 //save the user id in session...
-	 session.setAttribute("userId", newUser.getId());
-	 //and redirect them to the /home routes
-	 return "redirect:/home";
+	 try {
+		  User newUser = userService.registerUser(user);
+		 //save the user id in session...
+		 session.setAttribute("userId", newUser.getId());
+		//lastly, redirect them to the /home routes
+		 return "redirect:/home";
+		 }
+	 catch(Exception expection) {
+		 model.addAttribute("error", "Duplicate Credentials. Pleae try again.");
+		 return "registrationPage.jsp";
+	 }
  }
  
  @RequestMapping(value="/login", method=RequestMethod.POST)
@@ -67,7 +77,7 @@ public class UserController {
 	 if(session.getAttribute("userId")==null) {
 		 model.addAttribute("error","You are not logged in. Please login or register to access home.");
 		 System.out.println("Uh uh girlfriend.");
-		 return "redirect:/login";
+		 return "login.jsp";
 	 }
 	 // get user from session...
 	 Long userId = (Long)session.getAttribute("userId");

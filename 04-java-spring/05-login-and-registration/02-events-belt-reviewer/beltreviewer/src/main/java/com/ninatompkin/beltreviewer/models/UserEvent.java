@@ -15,27 +15,25 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="messages")
-public class Message {
-
+@Table(name="users_events")
+public class UserEvent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String content;
 	
 	@Column(updatable=false)
 	private Date createdAt;
 	private Date updatedAt;
-
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	private User author;
+	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="event_id")
 	private Event event;
 	
-	public Message() {
+	public UserEvent() {
 		
 	}
 	
@@ -43,6 +41,24 @@ public class Message {
 	
 	public Long getId() {
 		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
@@ -55,36 +71,6 @@ public class Message {
 
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
-	public String getContent() {
-		return content;
-	}
-
-
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-
-
-	public User getAuthor() {
-		return author;
-	}
-
-
-
-	public void setAuthor(User author) {
-		this.author = author;
 	}
 
 
@@ -110,4 +96,7 @@ public class Message {
 	protected void onUpdate() {
 		updatedAt = new Date();
 	}
+	
+	
+
 }

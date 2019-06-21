@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="messages")
@@ -21,6 +22,7 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	private String content;
 	
 	@Column(updatable=false)
@@ -35,8 +37,10 @@ public class Message {
 	@JoinColumn(name="event_id")
 	private Event event;
 	
-	public Message() {
-		
+	public Message(String content, User author, Event event) {
+		this.author = author;
+		this.event = event;
+		this.content = content;
 	}
 	
 	

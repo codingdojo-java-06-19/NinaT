@@ -1,5 +1,6 @@
 package com.ninatompkin.beltreviewer.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,7 +36,9 @@ public class Event {
 	private String name;
 	private String city;
 	private String state;
-	
+	@Future
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date eventDate;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User host;
@@ -82,6 +86,30 @@ public class Event {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 
@@ -145,6 +173,12 @@ public class Event {
 	}
 
 
+	public String formatEventDate() {
+		Date date = this.eventDate;
+		SimpleDateFormat format = new SimpleDateFormat("MMMM d, yyyy");
+		String formattedDate = format.format(date);
+		return formattedDate;
+	}
 
 	public Date getCreatedAt() {
 		return createdAt;

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
@@ -33,8 +35,9 @@ public class Event {
 	private String city;
 	private String state;
 	
-//	@OneToOne(mappedBy="event", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-//	private User host;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User host;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JsonIgnore
@@ -44,6 +47,9 @@ public class Event {
 			inverseJoinColumns=@JoinColumn(name="user_id")
 	)
 	private List<User> members;
+	
+	@OneToMany(mappedBy="event", fetch=FetchType.LAZY)
+	private List <Message> messages;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="MM-dd-yyyy")
@@ -56,6 +62,18 @@ public class Event {
 	
 	
 	
+	public User getHost() {
+		return host;
+	}
+
+
+
+	public void setHost(User host) {
+		this.host = host;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +82,18 @@ public class Event {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
 	}
 
 
@@ -130,6 +160,10 @@ public class Event {
 
 	public void addMember(User user) {
 		members.add(user);
+	}
+	
+	public void addMessage(Message message) {
+		messages.add(message);
 	}
 	
 	@PrePersist

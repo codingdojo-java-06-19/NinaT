@@ -17,6 +17,7 @@ import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Transient;
@@ -24,27 +25,34 @@ import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(unique=true)
+	@NotEmpty
 	@Email(message="Email must be valid")
 	private String email;
+
 	@Size(min=5, message="Password must be greater than 5 characters")
 	private String password;
 	
 	@Transient
 	private String passwordConfirmation;
 	
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String state;
 
-//	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-//	private List<Event> hostedEvents;
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	private List<Event> hostedEvents;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JsonIgnore
@@ -71,7 +79,22 @@ public class User {
 	}
 	
 	
-	
+	public List<Event> getHostedEvents() {
+		return hostedEvents;
+	}
+
+	public void setHostedEvents(List<Event> hostedEvents) {
+		this.hostedEvents = hostedEvents;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+
 	public Long getId() {
 		return id;
 	}

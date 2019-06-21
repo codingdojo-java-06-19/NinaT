@@ -7,7 +7,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/styles.css"/>
-	<title>Soccer Game</title>
+	<title>${event.name}</title>
 </head>
 	<body>
 		<div class="container">
@@ -43,7 +43,7 @@
 					<div class="message-wall">
 						<c:forEach items="${messages}" var="message">
 						<div class="message-group">
-							<p>${message.getAuthor()} says: ${message.getContent()}</p>
+							<p>${message.getAuthor().getFirstName()} says: ${message.getContent()}</p>
 							<p>~*~*~*~*~*~*~*~*~**~*~*~</p>
 						</div>
 						</c:forEach>
@@ -52,7 +52,7 @@
 						<label for="message">Add Comment:</label>
 						<textarea name="content"></textarea>
 						<input type="hidden" name="author" value="${loggedInUser.getId()}"/>
-						<input type="submit" name="Submit"/>
+						<input class="submit-btn" type="submit" name="Submit"/>
 					</form:form>
 				</div>
 			</div>

@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,8 @@ public class LoginRegController {
 	}
 
 	@RequestMapping("/")
-	public String goHome(@ModelAttribute("user") User user ){
+	public String goHome(@ModelAttribute("user") User user, HttpSession session){
+		System.out.println("This is our userid currently: " +session.getAttribute("userId"));
 		return "loginReg.jsp";
 	}
 	
@@ -36,11 +36,11 @@ public class LoginRegController {
 		userValidator.validate(user, result);
 		if(result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("registrationError", "Registration failed! Please ensure that you've filled in each field.");
-			return "redirect:/";
+			return "loginReg.jsp";
 		}
 		try {
 			//First, we'll try to register a new user. If the email credentials are not duplicates, then we'll be prompted to login.
-			User newUser = apiService.registerUser(user);
+			apiService.registerUser(user);
 			redirectAttributes.addFlashAttribute("preLoginMessage", "Registration successful! Please log in with your new credentials.");
 			return "redirect:/";
 		}

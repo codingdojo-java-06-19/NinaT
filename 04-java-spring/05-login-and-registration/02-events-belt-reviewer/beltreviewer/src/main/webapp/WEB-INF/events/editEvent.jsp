@@ -11,17 +11,17 @@
 </head>
 	<body>
 		<div class="container">
-		<h1>GoT Party</h1>
+		<h1>${event.getName()}</h1>
 		<div class="row">
 				<div class="col">
 					<h3>Edit Event</h3>
-					<form action="/" method="POST" autocomplete="off">
+					<form:form action="/events/updateEvent" method="POST" modelAttribute="event" autocomplete="off">
 						<div class="row">
 							<div class="col-25">
 								<label for="name">Name</label>
 							</div>
 							<div class="col-75">
-								<input type="text" name="name" value="GoT Party"/>
+								<input type="text" name="name" value="${event.getName()}"/>
 							</div>
 						</div>
 						<div class="row">
@@ -29,7 +29,7 @@
 								<label for="date">Date</label>
 							</div>
 							<div class="col-75">
-								<input type="date" name="date" value="2019-04-30"/>
+								<input type="date" name="eventDate"/>
 							</div>
 						</div>
 						<div class="row">
@@ -38,10 +38,11 @@
 							</div>
 							<div class="col-75">
 								<div class="col-80">
-									<input class="location" type="text" name="city" value="San Jose"/>
+									<input class="location" type="text" name="city" value="${event.getCity()}"/>
 								</div>
 								<div class="col-20">
 										<select name="state">
+											<option value="${event.getState()}" selected>${event.getState()}</option>
 											<option value="AL">AL</option>
 											<option value="AK">AK</option>
 											<option value="AR">AR</option>
@@ -95,9 +96,11 @@
 							</div>
 						</div>
 						<div class="row">
-							<input type="submit" value="Create Event"/>
+							<input type="hidden" name="host" value="${event.getHost().getId()}"/>
+							<input type="hidden" name="id" value="${event.getId()}"/>
+							<input class="submit-btn" type="submit" value="Update Event"/>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

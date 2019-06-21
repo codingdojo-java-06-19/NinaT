@@ -13,7 +13,7 @@
 		<div class="container">
 			<h1>Welcome, ${user.firstName} ${user.lastName}!</h1>
 			<h3 class="good">${eventSuccess}</h3>
-			<form class="right-link" action="/logout" method="POST"><input type="submit" value="Logout"/></form>
+			<form action="/logout" method="POST"><input class="right-link normal-link" type="submit" value="Logout"/></form>
 			<div class="table-group">
 				<p>Here are some of the events in your state:</p>
 				<table class="tablestyle">
@@ -30,7 +30,37 @@
 						<td>${event.formatEventDate()}</td>
 						<td>${event.city}</td>
 						<td>${event.host.getFirstName()}</td>
-						<td><a href="/">Join</a> Joining  <a href="/">Cancel</a></td>
+						<td>
+							<c:choose>
+								<c:when test="${event.host.getId()==user.getId()}">
+									<div class="col">
+										<a class="edit-link" href="/events/${event.getId()}/edit">Edit</a>
+									</div>
+									<div class="col">
+										<form:form action="/events/delete/${event.getId()}" method="POST">
+											<input class="normal-link" type="submit" value="Delete">
+										</form:form>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${event.members.contains(user)}">
+											<div class="row">
+												<div class="col">
+													<span>Going</span>
+												</div> 
+												<div class="col">
+													<a href="/events/${event.getId()}/cancel">Cancel</a>
+												</div>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<a href="/events/${event.getId()}/join">Join</a>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -58,7 +88,37 @@
 						<td>${event.formatEventDate()}</td>
 						<td>${event.city}</td>
 						<td>${event.host.getFirstName()}</td>
-						<td><a href="/">Join</a></td>
+						<td>
+							<c:choose>
+								<c:when test="${event.host.getId()==user.getId()}">
+									<div class="col">
+										<a class="edit-link" href="/events/${event.getId()}/edit">Edit</a>
+									</div>
+									<div class="col">
+										<form:form action="/events/delete/${event.getId()}" method="POST">
+											<input class="normal-link" type="submit" value="Delete">
+										</form:form>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${event.members.contains(user)}">
+											<div class="row">
+												<div class="col">
+													<span>Going</span>
+												</div> 
+												<div class="col">
+													<a href="/events/${event.getId()}/cancel">Cancel</a>
+												</div>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<a href="/events/${event.getId()}/join">Join</a>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 					</c:forEach>
 					<tr>
@@ -153,7 +213,7 @@
 						</div>
 						<div class="row">
 							<input type="hidden" name="host" value="${user.getId()}"/>
-							<input type="submit" value="Create Event"/>
+							<input class="submit-btn" type="submit" value="Create Event"/>
 						</div>
 					</form:form>
 					<p>${eventError}</p>

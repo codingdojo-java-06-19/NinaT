@@ -22,7 +22,6 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
 	private String content;
 	
 	@Column(updatable=false)
@@ -37,12 +36,15 @@ public class Message {
 	@JoinColumn(name="event_id")
 	private Event event;
 	
+	public Message() {
+		
+	}
+	
 	public Message(String content, User author, Event event) {
 		this.author = author;
 		this.event = event;
 		this.content = content;
 	}
-	
 	
 	
 	public Long getId() {

@@ -73,12 +73,13 @@ public class ApiService {
 	  return eventRepo.save(event);
   }
   
-  //Return this users' state
+  //Return this users' state with an id
   public String thisUsersState(Long user_id) {
 	  User thisUser = userRepo.findById(user_id).orElse(null); 
 	  return thisUsersState(thisUser);
   }
   
+  //Return this users' state with a user object
   public String thisUsersState(User user) {
 	  return user.getState();
   }
@@ -99,6 +100,28 @@ public class ApiService {
   public Event findThisEvent(Long eventId) {
 	  Event thisEvent = eventRepo.findById(eventId).orElse(null);
 	  return thisEvent;
+  }
+  
+  //Delete one Event By Id
+  public void deleteThisEvent(Long eventId) {
+	  Event thisEvent = findThisEvent(eventId);
+	  eventRepo.delete(thisEvent);
+  }
+  
+  //Have a member join an event
+  public void joinThisEvent(Long eventId, Long userId) {
+	  Event thisEvent = findThisEvent(eventId);
+	  User thisUser = userRepo.findById(userId).orElse(null);
+	  thisEvent.addMember(thisUser);  
+	  eventRepo.save(thisEvent);
+  }
+  
+  //Have someone remove themselves from an event
+  public void stopGoingToThisEvent(Long eventId, Long userId) {
+	  Event thisEvent = findThisEvent(eventId);
+	  User thisUser = userRepo.findById(userId).orElse(null);
+	  thisEvent.getMembers().remove(thisUser);
+	  eventRepo.save(thisEvent);
   }
   
   ///////////////MESSAGE-RELATED SERVICES///////////////////

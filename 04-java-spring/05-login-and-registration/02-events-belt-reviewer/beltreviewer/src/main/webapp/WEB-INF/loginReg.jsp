@@ -21,7 +21,8 @@
 						<p class="bad">${registrationError}</p>
 						<form:form method="POST" action="/register" modelAttribute="user" autocomplete="off">
 							<div class="row">
-								<div class="col-25">
+								<form:errors cssClass="bad" path="firstName"/>
+								<div class="col-25">	
 									<label for="firstName">First Name:</label>
 								</div>
 								<div class="col-75">
@@ -123,7 +124,7 @@
 								</div>
 							</div>
 							<div class="row">
-									<input type="submit" name="Register"/>
+									<input class="submit-btn" type="submit" name="Register"/>
 							</div>
 						</form:form>
 						<p class="good">${preLoginMessage}</p>
@@ -152,7 +153,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<input type="submit" value="Login"/>
+								<input class="submit-btn" type="submit" value="Login"/>
 							</div>
 						</form>
 					</fieldset>

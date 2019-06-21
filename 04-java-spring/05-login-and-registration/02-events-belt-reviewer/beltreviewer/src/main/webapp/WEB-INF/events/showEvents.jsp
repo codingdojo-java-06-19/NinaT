@@ -12,7 +12,7 @@
 	<body>
 		<div class="container">
 			<h1>Welcome, Ninja</h1>
-			<a class="right-link" href="/logout">Logout</a>
+			<form class="right-link" action="/logout" method="POST" >Logout</form>
 			<div class="table-group">
 				<p>Here are some of the events in your state:</p>
 				<table class="tablestyle">

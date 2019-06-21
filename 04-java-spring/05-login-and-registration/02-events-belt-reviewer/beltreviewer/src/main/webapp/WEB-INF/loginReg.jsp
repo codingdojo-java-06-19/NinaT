@@ -11,12 +11,15 @@
 </head>
 	<body>
 		<div class="container">
+			<h3 class="bad">${preLogIn}</h3>
+			<h3 class="good">${logoutSuccess}</h3>
 			<h1>Welcome</h1>
 			<div class="row">
 				<div class="col">
 					<fieldset>
 						<legend>Register</legend>
-						<form autocomplete="off">
+						<p class="bad">${registrationError}</p>
+						<form:form method="POST" action="/register" modelAttribute="user" autocomplete="off">
 							<div class="row">
 								<div class="col-25">
 									<label for="firstName">First Name:</label>
@@ -116,19 +119,22 @@
 									<label for="password">PW Conf:</label>
 								</div>
 								<div class="col-75">
-									<input type="password" name="pwConfirmation"/>
+									<input type="password" name="passwordConfirmation"/>
 								</div>
 							</div>
 							<div class="row">
 									<input type="submit" name="Register"/>
 							</div>
-						</form>
+						</form:form>
+						<p class="good">${preLoginMessage}</p>
 					</fieldset>
 				</div>
 				<div class="col">
+					
 					<fieldset>
 						<legend>Login</legend>
-						<form autocomplete="off">
+							<p class="bad">${loginError}</p>
+						<form action="/login" method="POST" autocomplete="off">
 							<div class="row">
 								<div class="col-25">
 									<label for="email">Email: </label>

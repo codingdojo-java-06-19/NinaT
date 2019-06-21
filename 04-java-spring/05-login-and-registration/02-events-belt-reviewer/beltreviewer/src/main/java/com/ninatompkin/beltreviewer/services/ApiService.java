@@ -32,7 +32,7 @@ public class ApiService {
         return userRepo.save(user);
     }
 
-// find user by email
+    // find user by email
     public User findByEmail(String email) {
         return userRepo.findByEmail(email);
     }

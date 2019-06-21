@@ -51,7 +51,7 @@ public class User {
 	@NotEmpty
 	private String state;
 
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
 	private List<Event> hostedEvents;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -63,7 +63,7 @@ public class User {
 	)
 	private List<Event> events;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="author", fetch=FetchType.LAZY)
 	private List<Message> messages;
 	
 	@Column(updatable=false)
